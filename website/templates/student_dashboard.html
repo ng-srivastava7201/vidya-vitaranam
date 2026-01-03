@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome {{ current_user.name }} (Student)</h1>
+
+<h2>Search Content</h2>
+
+<form method="GET">
+    <input
+        type="text"
+        name="q"
+        placeholder="Search by subject, chapter or teacher"
+        value="{{ request.args.get('q', '') }}"
+    >
+
+    <select name="subject">
+        <option value="">All Subjects</option>
+        {% for sub in subjects %}
+            <option value="{{ sub }}"
+                {% if sub == selected_subject %}selected{% endif %}
+            >
+                {{ sub }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
+
+<hr>
+
+{% if contents %}
+    {% for item in contents %}
+        <div>
+            <h3>{{ item.subject }} – {{ item.chapter }}</h3>
+            <p>By {{ item.teacher_name }}</p>
+
+            {% if item.filename %}
+                <a href="{{ url_for('views.preview', content_id=item.id) }}">
+                    Preview
+                </a>
+
+            {% endif %}
+
+            {% if item.youtube_link %}
+                |
+                <a href="{{ item.youtube_link }}" target="_blank">
+                    Watch Video
+                </a>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No content found.</p>
+{% endif %}
+
+{% endblock %}

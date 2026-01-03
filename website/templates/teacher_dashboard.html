@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome {{ user.name }} (Teacher)</h1>
+
+<ul>
+    <li><a href="/upload">Upload Notes / Videos</a></li>
+    <li>Recent Uploads</li>
+</ul>
+
+{% endblock %}

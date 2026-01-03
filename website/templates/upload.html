@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+<h2>Upload Content</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="subject" placeholder="Subject" required><br><br>
+
+    <input type="text" name="chapter" placeholder="Chapter Name" required><br><br>
+
+    <input type="file" name="file"><br><br>
+
+    <input type="url" name="youtube" placeholder="YouTube Link"><br><br>
+
+    <button type="submit">Upload</button>
+
+</form>
+{% endblock %}

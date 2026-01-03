@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Preview{% endblock %}
+
+{% block content %}
+<h2>{{ content.subject }} – {{ content.chapter }}</h2>
+<p>By {{ content.teacher_name }}</p>
+
+<hr>
+
+{% if content.youtube_link %}
+    <h3>Video Preview</h3>
+    <iframe
+        width="560"
+        height="315"
+        src="{{ content.youtube_link | replace('watch?v=', 'embed/') }}"
+        frameborder="0"
+        allowfullscreen>
+    </iframe>
+    <hr>
+{% endif %}
+
+{% if content.filename %}
+    <h3>File Preview</h3>
+
+    {% if file_ext == 'pdf' %}
+        <iframe
+            src="{{ file_url }}"
+            width="100%"
+            height="500px">
+        </iframe>
+
+    {% elif file_ext in ['jpg', 'jpeg', 'png'] %}
+        <img src="{{ file_url }}" width="400">
+
+    {% else %}
+        <p>Preview not available for this file type.</p>
+    {% endif %}
+
+    <br><br>
+    <a href="{{ url_for('views.download_file', content_id=content.id) }}">
+        Download File
+    </a>
+{% endif %}
+
+{% endblock %}
