@@ -32,6 +32,14 @@ def create_app():
     def load_user(id):
         return User.query.get(int(id))
     
+    import os
+
+    UPLOAD_FOLDER = 'uploads'
+    app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, '..', 'uploads')
+
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
+    
     return app
 
 def create_database(app):
