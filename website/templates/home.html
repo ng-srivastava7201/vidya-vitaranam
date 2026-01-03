@@ -1,4 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 
-{% block content %}<h1>Home Page</h1>{% endblock %}
+{% block content %}
+<h1>Welcome {{ user.name }}</h1>
+
+{% if user.role == 'teacher' %}
+    <h2>Teacher Dashboard</h2>
+    <p>You can upload notes and videos.</p>
+
+{% elif user.role == 'student' %}
+    <h2>Student Dashboard</h2>
+    <p>You can view notes and videos.</p>
+
+{% else %}
+    <p>No role assigned.</p>
+{% endif %}
+
+{% endblock %}
